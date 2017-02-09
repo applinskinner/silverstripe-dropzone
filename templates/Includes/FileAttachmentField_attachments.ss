@@ -12,11 +12,7 @@
                             <% else %>
                                 style="width:{$Scope.SelectedThumbnailWidth}px"
                             <% end_if %>
-                            <% if $File.Orientation > -1 %>
-                                src="$File.CroppedImage($Scope.SelectedThumbnailWidth, $Scope.SelectedThumbnailHeight).URL"
-                            <% else %>
-                                src="$Scope.ThumbnailsDir/{$File.Extension.LowerCase}.png" onerror="this.src='$Scope.ThumbnailsDir/_blank.png'" onload="this.parentNode.style.backgroundImage='url('+this.src+')';this.style.display='none';"
-                            <% end_if %>
+                            src="$Scope.ThumbnailsDir/{$File.Extension.LowerCase}.png" onerror="this.src='$Scope.ThumbnailsDir/_blank.png'" onload="this.parentNode.style.backgroundImage='url('+this.src+')';this.style.display='none';"
                         >
                 </span>
                 <span class="file-meta file-name truncate" data-dz-name>$File.Title</span>

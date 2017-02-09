@@ -370,7 +370,7 @@ DroppedFile.prototype = {
         var settings = this.uploader.settings;
         var imageDir = settings.thumbnailsDir;
 
-        if(!file.type.match(/image.*/)) {
+        if(!settings.createImageThumbnails || !file.type.match(/image.*/)) {
             file.previewElement.classList.add('has-preview');
             q('[data-dz-thumbnail]', file.previewElement).forEach(function(img) {
                 var ext = file.name.split('.').pop();

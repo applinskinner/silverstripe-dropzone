@@ -430,58 +430,9 @@ class FileAttachmentField extends FileField {
                 "validation"
             );
             $result = false;
-        } else if ($value && is_array($value)) {
-            // Prevent a malicious user from inspecting element and changing
-            // one of the <input type="hidden"> fields to use an invalid File ID.
-            $validIDs = $this->getValidFileIDs();
-            foreach ($value as $id) {
-                if (!isset($validIDs[$id])) {
-                    if ($validator) {
-                        $validator->validationError(
-                            $this->name,
-                            _t(
-                                'FileAttachmentField.VALIDATION',
-                                'Invalid file ID sent.',
-                                array('id' => $id)
-                            ),
-                            "validation"
-                        );
-                    }
-                    $result = false;
-                }
-            }
         }
 
         return $result;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setValue($val, $data = array()) {
-        if ($data && is_array($data) && isset($data[$this->getName()])) {
-            // Prevent Form::loadDataFrom() from loading invalid File IDs
-            $isInvalid = false;
-            $validIDs = $this->getValidFileIDs();
-            // NOTE(Jake): If the $data[$name] is an array, its coming from 'loadDataFrom'
-            //             If its a single value, its just re-populating the ID on DB data most likely.
-            if (is_array($data[$this->getName()])) {
-                $ids = &$data[$this->getName()];
-                foreach ($ids as $i => $id) {
-                    if ($validIDs && !isset($validIDs[$id])) {
-                        unset($ids[$i]);
-                        $isInvalid = true;
-                    }
-                }
-                if ($isInvalid) {
-                    $ids = array_values($ids);
-                    $val = $ids;
-                    $this->hasInvalidFileID = true;
-                }
-                unset($ids); // stop $ids variable from modifying to $data array.
-            }
-        }
-        return parent::setValue($val, $data);
     }
 
     /**
