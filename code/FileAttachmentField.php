@@ -1149,6 +1149,14 @@ class FileAttachmentField extends FileField {
 
         return Convert::array2json($data);
     }
+
+    /**
+     * Gets a random string to be used for unique IDs
+     * @return string
+     */
+    public function getUniqueID() {
+        return uniqid();
+    }
 }
 
 class FileAttachmentField_SelectHandler extends UploadField_SelectHandler {

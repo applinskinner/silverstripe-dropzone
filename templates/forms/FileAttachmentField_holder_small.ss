@@ -1,6 +1,6 @@
-<div id="$Name" class="field<% if $extraClass %> $extraClass<% end_if %> supported">
+<div id="{$Name}_{$UniqueID}" class="field<% if $extraClass %> $extraClass<% end_if %> supported">
     <% if $Title %><label class="left" for="$ID">$Title</label><% end_if %>
-    <div id="{$Name}Dropzone" class="dropzone-holder <% if $isCMS %>backend<% end_if %> <% if $CanUpload %>uploadable<% end_if %>" data-config='$ConfigJSON'>
+    <div id="{$Name}_{$UniqueID}__Dropzone" class="dropzone-holder <% if $isCMS %>backend<% end_if %> <% if $CanUpload %>uploadable<% end_if %>" data-config='$ConfigJSON'>
         <p>
             <% if $IsMultiple && $CanUpload %>
                 <%t Dropzone.ATTACHFILESHERE_OR "Attach files by dropping them in here." %>
